@@ -4,11 +4,9 @@ const isJpg = require('is-jpg');
 const mozjpeg = require('mozjpeg');
 
 module.exports = options => buffer => {
-	options = Object.assign({
-		trellis: true,
+	options = {trellis: true,
 		trellisDC: true,
-		overshoot: true
-	}, options);
+		overshoot: true, ...options};
 
 	if (!Buffer.isBuffer(buffer)) {
 		return Promise.reject(new TypeError('Expected a buffer'));
@@ -16,20 +14,6 @@ module.exports = options => buffer => {
 
 	if (!isJpg(buffer)) {
 		return Promise.resolve(buffer);
-	}
-
-	// TODO: Remove these sometime far in the future
-	if (options.fastcrush) {
-		return Promise.reject(new Error('Option `fastcrush` was renamed to `fastCrush`'));
-	}
-	if (options.maxmemory) {
-		return Promise.reject(new Error('Option `maxmemory` was renamed to `maxMemory`'));
-	}
-	if (options.notrellis) {
-		return Promise.reject(new Error('Option `notrellis` was renamed to `trellis` and inverted'));
-	}
-	if (options.noovershoot) {
-		return Promise.reject(new Error('Option `noovershoot` was renamed to `overshoot` and inverted'));
 	}
 
 	const args = [];
