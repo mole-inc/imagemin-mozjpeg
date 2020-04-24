@@ -1,19 +1,19 @@
 'use strict';
 const execa = require('execa');
 const isJpg = require('is-jpg');
-const mozjpeg = require('mozjpeg');
+const mozjpeg = require('@mole-inc/mozjpeg');
 
-module.exports = options => buffer => {
+module.exports = options => async buffer => {
 	options = {trellis: true,
 		trellisDC: true,
 		overshoot: true, ...options};
 
 	if (!Buffer.isBuffer(buffer)) {
-		return Promise.reject(new TypeError('Expected a buffer'));
+		throw new TypeError('Expected a buffer');
 	}
 
 	if (!isJpg(buffer)) {
-		return Promise.resolve(buffer);
+		return buffer;
 	}
 
 	const args = [];
@@ -86,9 +86,10 @@ module.exports = options => buffer => {
 		args.push('-sample', options.sample.join(','));
 	}
 
-	return execa.stdout(mozjpeg, args, {
+	const {stdout} = await execa(mozjpeg, args, {
 		encoding: null,
 		input: buffer,
 		maxBuffer: Infinity
 	});
+	return stdout;
 };

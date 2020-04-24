@@ -1,12 +1,12 @@
-# imagemin-mozjpeg [![Build Status](https://travis-ci.org/imagemin/imagemin-mozjpeg.svg?branch=master)](https://travis-ci.org/imagemin/imagemin-mozjpeg)
+# imagemin-mozjpeg ![Node CI](https://github.com/mole-inc/imagemin-mozjpeg/workflows/Node%20CI/badge.svg)
 
-> [Imagemin](https://github.com/imagemin/imagemin) plugin for [mozjpeg](https://github.com/mozilla/mozjpeg)
+> [Imagemin](https://github.com/imagemin/imagemin) plugin for [mozjpeg](https://github.com/mole-inc/mozjpeg)
 
 
 ## Install
 
 ```
-$ npm install imagemin-mozjpeg
+$ npm install @mole-inc/imagemin-mozjpeg
 ```
 
 
@@ -14,7 +14,7 @@ $ npm install imagemin-mozjpeg
 
 ```js
 const imagemin = require('imagemin');
-const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminMozjpeg = require('@mole-inc/imagemin-mozjpeg');
 
 (async () => {
 	await imagemin(['images/*.jpg'], 'build/images', {
@@ -30,7 +30,7 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 
 ## API
 
-### imageminMozjpeg([options])(buffer)
+### imageminMozjpeg(options?)(buffer)
 
 Returns a `Promise<Buffer>`.
 
@@ -174,4 +174,6 @@ Buffer to optimize.
 
 ## License
 
-MIT © [Imagemin](https://github.com/imagemin)
+This is a fork of [imagemin/imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg).
+
+see license file.
